@@ -12,10 +12,7 @@
   <body>
     <%= render 'shared/navigation' %>
     <div class="container">
-
-      <p class="notice alert alert-primary" role="alert"><%= notice %></p>
-      <p class="alert alert-danger" role="alert"><%= alert %></p>
-
+      <%= render 'layouts/messages' %>
       <%= yield %>
     </div>
   </body>
