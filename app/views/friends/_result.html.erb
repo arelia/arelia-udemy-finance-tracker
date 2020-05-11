@@ -9,7 +9,7 @@
       <thead>
         <th>Name</th>
         <th>Email</th>
-        <th>Actions</th>
+        <th colspan="2">Actions</th>
       </thead>
       <tbody>
         <% @friends.each do |friend| %>
@@ -17,7 +17,15 @@
             <td><%= friend.full_name %></td>
             <td><%= friend.email %></td>
             <td><%= link_to "View Profile", '#',  class: "btn btn-sm btn-success" %></td>
-            <td><%= link_to 'Follow friend?', '#', class: "btn btn-sm btn-success", method: :post %></td>
+
+            <td>
+              <% if current_user.not_friends_with?(friend.id) %>
+                <%= link_to 'Follow friend?', '#', class: "btn btn-sm btn-success", method: :post %>
+                <% else %>
+                <span class="badge badge-secondary">You are already friends 😊</span>
+              <% end %>
+            </td>
+
           </tr>
         <% end %>
       </tbody>
