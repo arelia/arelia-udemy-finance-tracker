@@ -28,6 +28,10 @@ class User < ApplicationRecord
     "Anonymous"
   end
 
+  def except_current_user(users)
+    users.reject { |user| user.id == self.id }
+  end
+
   def self.search(param)
     param.strip!
     to_send_back = (matches_first_name(param) + matches_last_name(param) + matches_email(param)).uniq
