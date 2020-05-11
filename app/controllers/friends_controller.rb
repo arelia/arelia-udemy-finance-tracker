@@ -7,6 +7,7 @@ class FriendsController < ApplicationController
   def search
     if params[:friends].present?
       @friends = User.search(params[:friends])
+      @friends = except_current_user(@friends)
       if @friends
         respond_to do |format|
           format.js { render partial: 'friends/result' }
@@ -24,5 +25,10 @@ class FriendsController < ApplicationController
       end
     end
   end
+
+  def except_current_user(users)
+    users.reject { |user| user.id == current_user.id }
+  end
+
 
 end
