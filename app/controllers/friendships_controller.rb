@@ -27,9 +27,10 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
+    friend = User.find(params[:id])
     friendship = current_user.friendships.where(friend_id: params[:id]).first
     friendship.destroy
-    flash[:notice] = "You have stopped following them."
+    flash[:notice] = "You have stopped following #{friend.full_name}."
     redirect_to friends_path
   end
 
