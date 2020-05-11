@@ -5,16 +5,10 @@ class FriendsController < ApplicationController
   end
 
   def search
-    @friend = params[:friends]
-    render json: @friend
-  end
-
-
-  def search
     if params[:friends].present?
-      @friend = params[:friends]
+      @friends = params[:friends]
       # @friend = User.where(first_name: params[:friends])
-      if @friend
+      if @friends
         respond_to do |format|
           format.js { render partial: 'friends/result' }
         end
