@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get 'my_portfolio', to: 'users#my_portfolio'
   get 'search_stock', to: 'stocks#search'
+  
+  get 'friends', to: 'friends#list'
   get 'search_friend', to: 'friends#search'
-
-  get 'friends', to: 'friendships#list'
 end
