@@ -26,6 +26,14 @@ class FriendshipsController < ApplicationController
     end
   end
 
+  def create
+    user = current_user
+    friend = User.find(params[:friend])
+    @friendship = Friendship.create(user: user, friend: friend)
+      flash[:notice] = "You are now following #{friend.full_name}."
+      redirect_to friends_path
+  end
+
   def destroy
     friend = User.find(params[:id])
     friendship = current_user.friendships.where(friend_id: params[:id]).first
