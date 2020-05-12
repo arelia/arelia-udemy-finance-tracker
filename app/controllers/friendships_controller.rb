@@ -27,11 +27,14 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    user = current_user
     friend = User.find(params[:friend])
-    @friendship = Friendship.create(user: user, friend: friend)
+    current_user.friendships.build(friend_id: friend.id)
+    if current_user.save
       flash[:notice] = "You are now following #{friend.full_name}."
-      redirect_to friends_path
+    else
+      flash[:alert] = "There was something wrong with the request to follow #{friend.full_name}."
+    end
+    redirect_to friends_path
   end
 
   def destroy
